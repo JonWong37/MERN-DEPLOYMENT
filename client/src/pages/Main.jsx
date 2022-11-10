@@ -3,6 +3,7 @@ import Create from '../components/Create'
 import Dashboard from '../components/Dashboard';
 import Edit from '../components/Edit';
 import { Route, Routes } from 'react-router-dom';
+import Details from './Details';
 
 
 
@@ -15,15 +16,14 @@ const changeRefresh = () => setRefresh(!refresh)
     return (
         <fieldset>
             <legend>Main.jsx</legend>
-            <Create changeRefresh={changeRefresh}/>
-            {/* <Dashboard refresh={refresh} changeRefresh={changeRefresh}/> */}
+            {/* <Create changeRefresh={changeRefresh}/> */}
+            {/* <Dashboard /> */}
             <Routes>
-        <Route path="/new/author" element ={<Create />}/>
-        {/* <Route path="/" element={<Create />}/> */}
-        <Route path="/" element={<Dashboard refresh={refresh} changeRefresh={changeRefresh}/>}/>
-        {/* <Route path="/products/:product_id" element={<Details/>}/> */}
-        <Route path="/authors/edit/:author_id" element={<Edit />}/>
-        </Routes>
+                <Route path="/new/pirate" element ={<Create />}/>
+                <Route path="/" element={<Dashboard refresh={refresh} changeRefresh={changeRefresh}/>}/>
+                <Route path="/pirates/edit/:pirate_id" element={<Edit />}/>
+                <Route path="/pirate/:pirate_id" element={<Details />}/>
+            </Routes>
         </fieldset>
     )   
 }

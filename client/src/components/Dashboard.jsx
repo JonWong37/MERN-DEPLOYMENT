@@ -4,21 +4,23 @@ import {Link} from 'react-router-dom'
 
 const Dashboard = ({refresh, changeRefresh}) => {
     // state
-    const [allAuthors, setAllAuthors] = useState([])
+    const [allPirates, setAllPirates] = useState([])
+    const [picurl, setPicUrl] = useState("")
     
     useEffect(() =>{
-        axios.get("http://localhost:8000/api/authors")
+        axios.get("http://localhost:8000/api/pirates")
         .then(res => {
             res.data.sort((a,b) => a.name.localeCompare(b.name))
-            setAllAuthors(res.data)
+            setAllPirates(res.data)
+            setPicUrl(res.data.url)
         })
         .catch(errors => console.log(errors))
     },[refresh])
 
     // handler
 
-    const deleteAuthor = (author_id) => {
-        axios.delete(`http://localhost:8000/api/authors/${author_id}`)
+    const deletePirate = (pirate_id) => {
+        axios.delete(`http://localhost:8000/api/pirates/${pirate_id}`)
         .then(res => {
             console.log({refresh})
             changeRefresh()
@@ -26,34 +28,31 @@ const Dashboard = ({refresh, changeRefresh}) => {
         .catch(errors => console.log(errors))
     }
 
-    // allAuthors.sort((a,b) => a.name.localeCompare(b.name))
-
-    const sorts = () => {
-        allAuthors.sort((a,b) => a.name.localeCompare(b.name))
-        console.log(allAuthors)
-    }
+    // allPirates.sort((a,b) => a.name.localeCompare(b.name))
 
     return (
         <fieldset>
             <legend>Dashboard.jsx</legend>
-            {/* <button onClick={sorts}>Sort</button> */}
+            <h1>Pirate Crew</h1>
+            <p><Link to={'/new/pirate'}>Add Pirate</Link></p>
             <table>
                 <thead>
                     <tr>
-                        <th>Author Name</th>
+                        <th>Pirates</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        allAuthors.map((author) => {
-                            const {_id, name} = author
+                        allPirates.map((pirate) => {
+                            const {_id, name, url} = pirate
                             return(
-                                <tr key ={author._id}>
+                                <tr key = {pirate._id}>
                                     <td>{name}</td>
+                                    <td><img src={`${url}`} alt="picture" /></td>
                                     <td>
-                                        <Link to ={`/authors/edit/${_id}`}>Edit</Link>
+                                        <Link to ={`/pirate/${_id}`}>View Pirate</Link>
                                     </td>
-                                    <td><button onClick={() => deleteAuthor(_id)}>Delete</button></td>
+                                    <td><button onClick={() => deletePirate(_id)}>Delete</button></td>
                                 </tr>
                             )
                         })

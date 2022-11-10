@@ -11,8 +11,8 @@ function App() {
   return (
     <fieldset>
       <legend>App.jsx</legend>
-      <h1>Favorite Authors</h1>
-      <p><Link to ={"/new/author"}>Add a new Favorite Author</Link></p>
+      {/* <h1>Pirate Crew</h1>
+      <p><Link to ={"/new/pirate"}>Add Pirate</Link></p> */}
       <Main />
     </fieldset>
   );

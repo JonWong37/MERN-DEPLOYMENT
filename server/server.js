@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
-const AuthorRoutes = require("./routes/Author.routes")
-AuthorRoutes(app)
+const PirateRoutes = require("./routes/Pirate.routes")
+PirateRoutes(app)
 
 app.listen(PORT, () => console.log(`EXPRESS RUNNING ON PORT ${PORT}`))
